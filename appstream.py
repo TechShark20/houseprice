@@ -47,7 +47,7 @@ with col1:
     loci = st.selectbox(" Select address : ",
                      address)
 
-    sqrft = st.slider('how much sqft ', int(df['SQUARE_FT'].min()), int(df['SQUARE_FT'].max()), 10)
+    sqrft = st.slider('how much sqft ',900, 7000, 10)
 with col2:
     undercon = int(st.checkbox("is this underconstruction"))
     rer=int(st.checkbox('A RERA project or not '))
@@ -57,8 +57,8 @@ with col3:
   bhk=int(st.text_input('no of apparttment', '2'))
 with col4:
     
-  resaler =int(col4.checkbox('is it for resale '))
-  redytomove =int(col4.checkbox('is it ready to move '))
+  resaler =int(st.checkbox('is it for resale '))
+  redytomove =int(st.checkbox('is it ready to move '))
 
 
 
