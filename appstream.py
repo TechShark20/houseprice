@@ -53,7 +53,7 @@ with col1:
     sqrft = st.slider('how much sqft ',900, 7000, 10)
 with col2:
     postedby=st.selectbox("postedby",postby)
-    bhk=int(st.text_input('no of apparttment', '2'))
+    bhk=int(st.text_input('no of bhk', '2'))
     
 with col3:
     undercon = int(st.checkbox("is this underconstruction"))
