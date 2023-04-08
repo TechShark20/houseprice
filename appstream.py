@@ -70,5 +70,5 @@ if(st.button("Predict Price")):
     
 
     price=int(modelpred(postedby,loci,undercon,rer, bhk,sqrft,redytomove,resaler))
-    st.text("precited selling price in  is: "+str(price))
+    st.text("precited selling price in lacs is: "+str(price))
     #modelpred('Dealer','mumbai',1,1, 4,1780,1,1)
