@@ -8,13 +8,16 @@ Original file is located at
 """
 
 import pandas as pd
+from sklearn.preprocessing import LabelEncoder
 import streamlit as st
 import pickle
 df=pd.read_csv("train.csv")
 df=df.drop(['LONGITUDE','LATITUDE','BHK_OR_RK'],axis=1)
 df['ADDRESS'] = df['ADDRESS'].apply(lambda x: x.split(',')[-1].lower())
-trfaddr= pickle.load( open('address.pkl','rb'))
-trfpostby= pickle.load( open('postby.pkl','rb'))
+leloc= LabelEncoder()
+lepost= LabelEncoder()
+leloc.fit(df['ADDRESS'])
+lepost.fit(df['POSTED_BY'])
 pickled_model = pickle.load(open('modelprice.pkl', 'rb'))
 
 address=df['ADDRESS'].unique()
@@ -23,14 +26,14 @@ postby=df['POSTED_BY'].unique()
 def modelpred(postby,location,undconstru,rera,bhkno,sqft,readytomove,resale):
   keys = ['POSTED_BY', 'UNDER_CONSTRUCTION', 'RERA', 'BHK_NO.', 'SQUARE_FT', 'READY_TO_MOVE', 'RESALE', 'ADDRESS']
   arr={}
-  arr['POSTED_BY']=trfpostby.transform([postby])[0]
+  arr['POSTED_BY']=lepost.transform([postby])[0]
   arr['UNDER_CONSTRUCTION']=undconstru
   arr['RERA']=rera
   arr['BHK_NO.']=bhkno
   arr['SQUARE_FT']=sqft
   arr['READY_TO_MOVE']=readytomove
   arr['RESALE']=resale
-  arr['ADDRESS']=trfaddr.transform([location])[0]
+  arr['ADDRESS']=leloc.transform([location])[0]
   df = pd.DataFrame([arr])
   return pickled_model.predict(df)[-1]
   
