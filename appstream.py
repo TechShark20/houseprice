@@ -42,19 +42,23 @@ st.title("House price prediction")
 st.write("This project is devoloped for miniskill project of datamining lab ")
 
 
-col1, col2,col3,col4 = st.columns(4)
-
-loci = col1.selectbox(" Select address : ",
+col1, col2,col3,col4 = st.tabs(['tab1','tab2','tab3','tab4'])
+with col1:
+    loci = st.selectbox(" Select address : ",
                      address)
 
-sqrft = col1.slider('how much sqft ', int(df['SQUARE_FT'].min()), int(df['SQUARE_FT'].max()), 10)
-
-undercon = int(col2.checkbox("is this underconstruction"))
-rer=int(col2.checkbox('A RERA project or not '))
-postedby=col3.selectbox("postedby",postby)
-bhk=int(col3.text_input('no of apparttment', '2'))
-resaler =int(col4.checkbox('is it for resale '))
-redytomove =int(col4.checkbox('is it ready to move '))
+    sqrft = st.slider('how much sqft ', int(df['SQUARE_FT'].min()), int(df['SQUARE_FT'].max()), 10)
+with col2:
+    undercon = int(st.checkbox("is this underconstruction"))
+    rer=int(st.checkbox('A RERA project or not '))
+with col3:
+    
+  postedby=st.selectbox("postedby",postby)
+  bhk=int(st.text_input('no of apparttment', '2'))
+with col4:
+    
+  resaler =int(col4.checkbox('is it for resale '))
+  redytomove =int(col4.checkbox('is it ready to move '))
 
 
 
