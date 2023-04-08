@@ -35,7 +35,7 @@ def modelpred(postby,location,undconstru,rera,bhkno,sqft,readytomove,resale):
   arr['RESALE']=resale
   arr['ADDRESS']=leloc.transform([location])[0]
   df = pd.DataFrame([arr])
-  return pickled_model.predict(df)[-1]
+  return pickled_model.predict(df)[0]
   
 
 
@@ -52,12 +52,13 @@ with col1:
 
     sqrft = st.slider('how much sqft ',900, 7000, 10)
 with col2:
+    postedby=st.selectbox("postedby",postby)
+    bhk=int(st.text_input('no of apparttment', '2'))
+    
+with col3:
     undercon = int(st.checkbox("is this underconstruction"))
     rer=int(st.checkbox('A RERA project or not '))
-with col3:
-    
-  postedby=st.selectbox("postedby",postby)
-  bhk=int(st.text_input('no of apparttment', '2'))
+  
 with col4:
     
   resaler =int(st.checkbox('is it for resale '))
